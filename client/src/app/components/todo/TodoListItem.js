@@ -1,9 +1,14 @@
 import React from 'react';
+import classnames from 'classnames';
 
-const TodoListItem = () => {
+import './TodoListItem.css';
+
+const TodoListItem = ({todo, completeTodo}) => {
   return (
-    <li className="todo-list__item">
-      TODO LIST ITEM
+    <li className={classnames('todo-list__item', (todo.completed) ? 'todo-list__item--completed' : '')}>
+      <h1>{todo.message}</h1>
+      <span className="btn-complete" onClick={(ev) => completeTodo(todo.id, !todo.completed)}>C</span>
+      <span className="btn-remove">D</span>
     </li>
   );
 };

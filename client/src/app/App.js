@@ -30,13 +30,21 @@ function App() {
     ]);
   };
 
+  const completeTodo = (id, completed) => {
+    setTodos([
+      ...todos.map((todo) => todo.id === id ? {...todo, completed: completed } : todo)
+    ]);
+  };
+
   return (
     <div className="app">
-      <Header />
-      <main className="">
-        <TodoForm addTodo={addTodo} />
-        <TodoList todos={todos}  />
-      </main>
+      <div className="app__container">
+        <Header />
+        <main className="app__main">
+          <TodoForm addTodo={addTodo} />
+          <TodoList todos={todos} completeTodo={(id, completed) => completeTodo(id, completed)}  />
+        </main>
+      </div>
     </div>
   );
 }
