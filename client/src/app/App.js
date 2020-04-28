@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Header } from './components/layout';
@@ -15,7 +15,11 @@ modifiedAt: number
 */
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todoapp.todos')) || []);
+
+  useEffect(() => {
+    localStorage.setItem('todoapp.todos', JSON.stringify(todos));
+  }, [todos]);
 
   const addTodo = (message) => {
     setTodos([
@@ -32,7 +36,7 @@ function App() {
 
   const completeTodo = (id, completed) => {
     setTodos([
-      ...todos.map((todo) => todo.id === id ? {...todo, completed } : todo)
+      ...todos.map((todo) => todo.id === id ? {...todo, completed, modifiedAt: new Date().getTime() } : todo)
     ]);
   };
 
