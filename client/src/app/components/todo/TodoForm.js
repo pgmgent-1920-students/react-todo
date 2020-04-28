@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const TodoForm = () => {
+const TodoForm = ({addTodo}) => {
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+    setMessage('');
+
+    addTodo(message);
+  };
+
   return (
     <div className="todo-form-container">
-      TODO FORM
+      <form className="todo-form" onSubmit={handleSubmit}>
+        <input type="text" required placeholder="Write your todo ..." onChange={(ev) => setMessage(ev.target.value)} value={message} />
+        <input type="submit" value="Add todo" />
+      </form>
     </div>
   );
 };
