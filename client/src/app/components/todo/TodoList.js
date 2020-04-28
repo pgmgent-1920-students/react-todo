@@ -2,7 +2,7 @@ import React from 'react';
 
 import TodoListItem from './TodoListItem';
 
-const TodoList = ({todos, completeTodo}) => {
+const TodoList = ({todos, completeTodo, removeTodo}) => {
 
   return (
     <div className="todo-list-container">
@@ -10,7 +10,7 @@ const TodoList = ({todos, completeTodo}) => {
         {(!!todos && todos.length > 0)
         ? (
           <ul>
-            {todos.map((todo) => <TodoListItem todo={todo} key={todo.id} completeTodo={(id, completed) => completeTodo(id, completed)} />)}
+            {todos.map((todo) => <TodoListItem todo={todo} key={todo.id} completeTodo={(id, completed) => completeTodo(id, completed)} removeTodo={(id) => removeTodo(id)} />)}
           </ul>
         )
         : (
